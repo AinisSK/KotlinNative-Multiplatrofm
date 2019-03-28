@@ -1,0 +1,11 @@
+name: AppIOS
+options:
+  minimumXcodeGenVersion: 2.2.0
+targets:
+  AppIOS:
+    platform: iOS
+    type: application
+    sources:
+      - AppIOS
+    dependencies:
+      - framework: common_all.framework

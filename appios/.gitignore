@@ -1,2 +1,19 @@
-.idea
-**/xcuserdata/**
+
+# OS X
+.DS_Store
+
+# Xcode
+build/*
+*.pbxuser
+*.pbxproj
+!default.pbxuser
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+/Pods
+*.mobileprovision
+
+Pods/
+/Carthage
+UserInterfaceState.xcuserstate

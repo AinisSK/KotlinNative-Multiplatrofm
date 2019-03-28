@@ -1,6 +1,6 @@
 buildscript {
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradle_android_version"
+        classpath "com.android.tools.build:gradle:3.3.2"
     }
     repositories {
         google()
