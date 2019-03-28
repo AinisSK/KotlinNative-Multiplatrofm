@@ -1,79 +1,55 @@
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
-apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 
-androidExtensions {
-    experimental = true
-}
-
-android {
-    compileSdkVersion 28
-
-    lintOptions {
-        abortOnError false
-    }
-
-    defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-
-def     kotlinJsOutputFile = "common-all.js"
+def kotlinJsOutputFile = "common-all.js"
 def firebaseFunctionsPath = "../firebase/functions/src"
 def firebaseFunctionsMain = firebaseFunctionsPath + '/main'
 def firebaseFunctionsTest = firebaseFunctionsPath + '/test'
-def cInteropFirestorePath = "src/iOSMain/c_interop/firestoer/"
+def cInteropFirestorePath = "src/iOSMain/c_interop/firestore/"
 
 kotlin {
 
     targets {
         def workingDir = buildscript.sourceFile.getParent()
         fromPreset(presets.iosX64, 'iOS') {
+
+            binaries {
+                framework {
+                    linkerOpts '-rpath', '@executable_path/Frameworks'
+                    linkerOpts "-F${workingDir}"
+                }
+            }
+        }
+
+        configure([iOS]) {
             compilations.main {
-                outputKinds('FRAMEWORK')
                 cinterops {
                     firestore {
                         packageName 'com.firebase.firestore'
                         defFile = file("${cInteropFirestorePath}FirebaseFirestore.def")
-                        linkerOpts "-F${cInteropFirestorePath}"
+                        linkerOpts "-F${cInteropFirestorePath}/FirebaseFirestore.framework"
                         includeDirs "${cInteropFirestorePath}/FirebaseFirestore.framework/Headers"
                     }
                 }
 
-                linkerOpts '-rpath', '@executable_path/Frameworks'
-                linkerOpts "-F${workingDir}"
             }
         }
 
-        fromPreset(presets.js, 'js') {
-
-            compileTestKotlinJs.kotlinOptions {
-                moduleKind = "commonjs"
-                metaInfo = true
-                sourceMap = true
-            }
-
-            compileKotlinJs.kotlinOptions {
-                moduleKind = "commonjs"
-                metaInfo = true
-                sourceMap = true
-            }
-        }
-        fromPreset(presets.android, 'android')
+//        fromPreset(presets.js, 'js') {
+//
+//            compileTestKotlinJs.kotlinOptions {
+//                moduleKind = "commonjs"
+//                metaInfo = true
+//                sourceMap = true
+//            }
+//
+//            compileKotlinJs.kotlinOptions {
+//                moduleKind = "commonjs"
+//                metaInfo = true
+//                sourceMap = true
+//            }
+//        }
     }
 
     sourceSets {
@@ -135,17 +111,17 @@ kotlin {
     }
 }
 
-// Fix ambigous configuration for dependencies
-kotlin.targets.matching { it.platformType.name == 'native' }.all {
-    compilations.all {
-        cinterops.all {
-            configurations[dependencyConfigurationName].attributes.attribute(
-                Usage.USAGE_ATTRIBUTE,
-                objects.named(Usage, 'kotlin-api')
-            )
-        }
-    }
-}
+//// Fix ambigous configuration for dependencies
+//kotlin.targets.matching { it.platformType.name == 'native' }.all {
+//    compilations.all {
+//        cinterops.all {
+//            configurations[dependencyConfigurationName].attributes.attribute(
+//                    Usage.USAGE_ATTRIBUTE,
+//                    objects.named(Usage, 'kotlin-api')
+//            )
+//        }
+//    }
+//}
 
 task listConfigs {
     doLast {
@@ -157,15 +133,15 @@ clean.doFirst {
     delete "${rootDir}/firebase/functions/src"
 }
 
-task copyCommonJsFirebaseModules(type: Copy) {
-    from compileKotlinJs.destinationDir
-    into firebaseFunctionsMain
-}
-
-task copyCompileTestKotlinJsToFirebase(type: Copy) {
-    from compileTestKotlinJs.destinationDir
-    into firebaseFunctionsTest
-}
+//task copyCommonJsFirebaseModules(type: Copy) {
+//    from compileKotlinJs.destinationDir
+//    into firebaseFunctionsMain
+//}
+//
+//task copyCompileTestKotlinJsToFirebase(type: Copy) {
+//    from compileTestKotlinJs.destinationDir
+//    into firebaseFunctionsTest
+//}
 
 task firebaseDeploy(type: Exec) {
     workingDir '../firebase'
@@ -192,12 +168,12 @@ task serializationRefToLocalModule << {
 }
 
 //firebaseTest
-firebaseTest.dependsOn(copyCompileTestKotlinJsToFirebase)
-copyCompileTestKotlinJsToFirebase.dependsOn(compileTestKotlinJs)
+//firebaseTest.dependsOn(copyCompileTestKotlinJsToFirebase)
+//copyCompileTestKotlinJsToFirebase.dependsOn(compileTestKotlinJs)
+////
 //
-
-//firebaseDeploy
-firebaseDeploy.dependsOn(serializationRefToLocalModule)
-serializationRefToLocalModule.dependsOn(copyCommonJsFirebaseModules)
-copyCommonJsFirebaseModules.dependsOn(compileKotlinJs)
+////firebaseDeploy
+//firebaseDeploy.dependsOn(serializationRefToLocalModule)
+//serializationRefToLocalModule.dependsOn(copyCommonJsFirebaseModules)
+//copyCommonJsFirebaseModules.dependsOn(compileKotlinJs)
 //

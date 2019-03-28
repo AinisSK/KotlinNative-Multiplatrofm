@@ -11,9 +11,8 @@ allprojects {
         }
         dependencies {
             classpath 'com.google.gms:google-services:4.0.1'
-            classpath 'com.android.tools.build:gradle:3.2.1'
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-            classpath "org.jetbrains.kotlin:kotlin-serialization:$serialization_plugin_version"
+            classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         }
     }
     repositories {

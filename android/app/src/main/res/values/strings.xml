@@ -1,4 +1,3 @@
 <resources>
-    <string name="app_name" translatable="false">KotlinMultiplatform</string>
-    <string name="default_channel" translatable="false">default_channel</string>
+    <string name="app_name">Kotlin-Native Githug</string>
 </resources>

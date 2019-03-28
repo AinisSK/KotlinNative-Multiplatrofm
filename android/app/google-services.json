@@ -1,27 +1,89 @@
 {
   "project_info": {
-    "project_number": "1073663573018",
-    "firebase_url": "https://kotlinmultiplatform.firebaseio.com",
-    "project_id": "kotlinmultiplatform",
-    "storage_bucket": "kotlinmultiplatform.appspot.com"
+    "project_number": "132276032",
+    "firebase_url": "https://by-cedon-skabs-multiplatform.firebaseio.com",
+    "project_id": "by-cedon-skabs-multiplatform",
+    "storage_bucket": "by-cedon-skabs-multiplatform.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1073663573018:android:56705f3fea24a4e3",
+        "mobilesdk_app_id": "1:132276032:android:36222d7abf926cf6",
         "android_client_info": {
-          "package_name": "com.rubylich.ktmp"
+          "package_name": "by.cedon.skabs.multiplatform"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1073663573018-4qta5a4r9fc81clb4tjqsboq7goqqrni.apps.googleusercontent.com",
+          "client_id": "132276032-lh6msqfuiqnijrvms6k9btnovasepo3p.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDwnH9EMQMczbjgfSUs5ae4oGLLLlBLQR8"
+          "current_key": "AIzaSyA6NhUjkaebkhrtLqmCQd0_ooA5ha6CXpc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132276032:android:941cf791e91a833f",
+        "android_client_info": {
+          "package_name": "by.cedon.skabs.nativeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132276032-lh6msqfuiqnijrvms6k9btnovasepo3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6NhUjkaebkhrtLqmCQd0_ooA5ha6CXpc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132276032:android:30efb0862425f8c2",
+        "android_client_info": {
+          "package_name": "by.minsk.ainissk.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132276032-lh6msqfuiqnijrvms6k9btnovasepo3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6NhUjkaebkhrtLqmCQd0_ooA5ha6CXpc"
         }
       ],
       "services": {
