@@ -26,8 +26,12 @@ android {
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
-        debug {}
-        release {}
+        debug {
+            matchingFallbacks = ['debug']
+        }
+        release {
+            matchingFallbacks = ['release']
+        }
     }
     lintOptions {
         checkReleaseBuilds false
@@ -52,7 +56,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':common-all', configuration: 'default')
+    implementation project(':common-all')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:multidex:1.0.3'
    

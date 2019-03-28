@@ -3,9 +3,9 @@ package by.cedon.skabs.multiplatform
 import android.app.Application
 import android.content.Context
 import android.util.Log
+import by.cedon.skabs.multiplatform.model.MainModel
 import by.cedon.skabs.multiplatform.model.MainModelImpl
 import by.cedon.skabs.multiplatform.model.log.PlatformLogger
-import by.cedon.skabs.multiplatform.model.MainModel
 import by.cedon.skabs.multiplatform.presentation.MainPresenter
 import kotlinx.coroutines.Dispatchers
 

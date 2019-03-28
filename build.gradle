@@ -8,9 +8,11 @@ allprojects {
             maven { url 'https://dl.bintray.com/jetbrains/kotlin-native-dependencies' }
             google()
             jcenter()
+            mavenCentral()
         }
         dependencies {
-            classpath 'com.google.gms:google-services:4.0.1'
+            classpath 'com.android.tools.build:gradle:3.3.1'
+            classpath 'com.google.gms:google-services:4.2.0'
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
             classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         }
@@ -27,6 +29,7 @@ allprojects {
 
         google()
         jcenter()
+        mavenCentral()
     }
 }
 

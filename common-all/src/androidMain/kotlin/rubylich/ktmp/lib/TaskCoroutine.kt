@@ -10,7 +10,7 @@ import kotlin.coroutines.suspendCoroutine
 
 
 suspend fun <T> Task<T>.await(): T {
-    if (isComplete) return if (isSuccessful) result else throw exception!!
+    if (isComplete) return if (isSuccessful) result!! else throw exception!!
     return suspendCoroutine { c: Continuation<T> ->
         addOnSuccessListener { c.resume(it) }
         addOnFailureListener { c.resumeWithException(it) }

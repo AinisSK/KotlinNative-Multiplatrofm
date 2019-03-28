@@ -1,9 +1,5 @@
 package rubylich.ktmp.base
 
-import kotlinx.serialization.ImplicitReflectionSerializer
-import kotlinx.serialization.Mapper
-import rubylich.ktmp.features.posts.Post
-
 expect abstract class BaseRepo<T : Any>(
     ref: String,
     parser: IBaseParser<T>
@@ -25,9 +21,9 @@ interface IBaseRepo<T : Any> {
 
 interface IBaseParser<T: Any> {
     fun parse(any: Any): T
-    fun serialize(t: T): Map<String, Any> = (t as Post).serialize()
+    fun serialize(t: T): Map<String, Any> //= (t as Post).serialize()
 }
 
-@UseExperimental(ImplicitReflectionSerializer::class)
-//inline fun <reified T: Any> T.serialize(): Map<String, Any> = Mapper.map(this)
-inline fun Post.serialize(): Map<String, Any> = Mapper.map(this)
+//@UseExperimental(ImplicitReflectionSerializer::class)
+////inline fun <reified T: Any> T.serialize(): Map<String, Any> = Mapper.map(this)
+//inline fun Post.serialize(): Map<String, Any> = Mapper.map(this)
