@@ -45,21 +45,6 @@ kotlin {
                 }
             }
         }
-
-//        fromPreset(presets.js, 'js') {
-//
-//            compileTestKotlinJs.kotlinOptions {
-//                moduleKind = "commonjs"
-//                metaInfo = true
-//                sourceMap = true
-//            }
-//
-//            compileKotlinJs.kotlinOptions {
-//                moduleKind = "commonjs"
-//                metaInfo = true
-//                sourceMap = true
-//            }
-//        }
     }
 
     sourceSets {
