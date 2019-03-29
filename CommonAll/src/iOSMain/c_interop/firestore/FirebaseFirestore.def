@@ -1,0 +1,6 @@
+language = Objective-C
+package = com.firebase.firestore
+headers = FIRCollectionReference.h FIRDocumentChange.h FIRDocumentReference.h FIRDocumentSnapshot.h FIRFieldPath.h FIRFieldValue.h FIRFirestore.h FIRFirestoreErrors.h FIRFirestoreSettings.h FIRFirestoreSource.h FIRGeoPoint.h FIRListenerRegistration.h FIRQuery.h FIRQuerySnapshot.h FIRSnapshotMetadata.h FIRTimestamp.h FIRTransaction.h FIRWriteBatch.h FirebaseFirestore.h
+headerFilter = **
+compilerOpts = -framework FirebaseFirestore
+linkerOpts = -framework FirebaseFirestore -framework BoringSSL -framework gRPC-C++ -framework gRPC-Core -framework gRPC-ProtoRPC -framework gRPC-RxLibrary -framework gRPC -framework leveldb-library -framework Protobuf -framework FIRAnalyticsConnector -framework Firebase -framework FirebaseAnalytics -framework FirebaseCore -framework FirebaseCoreDiagnostics -framework FirebaseInstanceID -framework GoogleAppMeasurement -framework GoogleUtilities -framework nanopb

@@ -1,6 +1,0 @@
-framework module common_all {
-    umbrella header "common_all.h"
-
-    export *
-    module * { export * }
-}

@@ -1,11 +1,11 @@
 import UIKit
-import common_all
-import common_client
+//import CommonAll
+import CommonClient
 
 class DependencyManager: NSObject {
     
     public lazy var mainModel : MainModel = {
-        return MainModelImpl(logger: logger)
+        return MainModelImpl(logger: logger as! CommonAllPlatformLogger)
     }()
     
     public lazy var uiContext : KotlinCoroutineContext = {
@@ -19,7 +19,7 @@ class DependencyManager: NSObject {
         )
     }
     
-    public lazy var logger : PlatformLogger = {
+    public lazy var logger : CommonAllPlatformLogger = {
         PlatformLoggerIos()
     }()
     
