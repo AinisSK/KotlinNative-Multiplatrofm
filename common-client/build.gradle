@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 //def firebaseFunctionsPath = "../firebase/functions/src"
 //def firebaseFunctionsMain = firebaseFunctionsPath + '/main'
 //def firebaseFunctionsTest = firebaseFunctionsPath + '/test'
-def cInteropFirestorePath = "src/iOSMain/c_interop/firestore/"
+def cInteropFirestorePath = "../common-all/src/iOSMain/c_interop/firestore/"
 
 android {
     defaultConfig {
@@ -21,7 +21,17 @@ kotlin {
 
         fromPreset(presets.android, 'android')
 
-        fromPreset(presets.iosX64, 'iOS')
+        def workingDir = buildscript.sourceFile.getParent()
+        fromPreset(presets.iosX64, 'iOS') {
+
+            binaries {
+                framework {
+                    linkerOpts '-rpath', '@executable_path/Frameworks'
+                    linkerOpts "-F${workingDir}"
+                    linkerOpts "-F${cInteropFirestorePath}"
+                }
+            }
+        }
     }
 
     sourceSets {

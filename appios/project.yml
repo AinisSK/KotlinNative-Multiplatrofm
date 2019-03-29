@@ -9,3 +9,4 @@ targets:
       - AppIOS
     dependencies:
       - framework: common_all.framework
+      - framework: common_client.framework
