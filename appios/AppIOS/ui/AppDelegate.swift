@@ -1,5 +1,6 @@
 import UIKit
-import common_all
+//import CommonAll
+import CommonClient
 
 let KTUnit = KotlinUnit()
 

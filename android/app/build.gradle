@@ -56,8 +56,8 @@ android {
 }
 
 dependencies {
-    implementation project(':common-all')
-    implementation project(':common-client')
+    implementation project(':CommonAll')
+    implementation project(':CommonClient')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:multidex:1.0.3'
    

@@ -1,5 +1,6 @@
 import UIKit
-import common_all
+//import CommonAll
+import CommonClient
 
 class GithubViewController: UIViewController, MainView {
     
@@ -31,6 +32,6 @@ class GithubViewController: UIViewController, MainView {
     }
     
     func showError(error: KotlinThrowable) {
-        dependencies().logger.logException(tag: "TAG", text: error.message!, exception: error as! KotlinException)
+        dependencies().logger.logException(tag: "TAG", text: error.message!, exception: error as KotlinThrowable?)
     }
 }

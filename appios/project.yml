@@ -5,7 +5,10 @@ targets:
   AppIOS:
     platform: iOS
     type: application
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.newco.app
     sources:
       - AppIOS
     dependencies:
-      - framework: common_all.framework
+      - framework: CommonClient.framework

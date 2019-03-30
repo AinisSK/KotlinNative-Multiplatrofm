@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
-import common_all
+//import CommonAll
+import CommonClient
 
 public class UI: Kotlinx_coroutines_core_nativeCoroutineDispatcher {
     override public func dispatch(context: KotlinCoroutineContext, block: Kotlinx_coroutines_core_nativeRunnable) {

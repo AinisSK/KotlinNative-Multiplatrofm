@@ -1,7 +1,8 @@
 import Foundation
-import common_all
+//import CommonAll
+import CommonClient
 
-class PlatformLoggerIos: NSObject, PlatformLogger {
+class PlatformLoggerIos: NSObject, CommonAllPlatformLogger {
     func logException(tag: String, text: String, exception: KotlinThrowable?) {
         print(text)
     }

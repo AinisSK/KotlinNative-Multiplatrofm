@@ -6,7 +6,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutines_version"
 
-    compile project(':common-all')
+    compile project(':CommonAll')
 }
 
 compileKotlin2Js {
