@@ -1,9 +1,6 @@
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
 
-//def firebaseFunctionsPath = "../firebase/functions/src"
-//def firebaseFunctionsMain = firebaseFunctionsPath + '/main'
-//def firebaseFunctionsTest = firebaseFunctionsPath + '/test'
 def cInteropFirestorePath = "../CommonAll/src/iOSMain/c_interop/firestore/"
 
 kotlin {

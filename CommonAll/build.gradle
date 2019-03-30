@@ -1,10 +1,6 @@
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
 
-//def kotlinJsOutputFile = "common-all.js"
-//def firebaseFunctionsPath = "../firebase/functions/src"
-//def firebaseFunctionsMain = firebaseFunctionsPath + '/main'
-//def firebaseFunctionsTest = firebaseFunctionsPath + '/test'
 def cInteropFirestorePath = "src/iOSMain/c_interop/firestore/"
 
 project.ext.react = [
@@ -76,6 +72,7 @@ kotlin {
             }
         }
         jsMain {
+            dependsOn commonMain
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutines_version"
@@ -95,12 +92,11 @@ kotlin {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-test-js"
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-js'
-//                implementation "org.jetbrains.kotlin:kotlin-test-annotations"
-
             }
         }
 
         androidMain {
+            dependsOn commonMain
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
@@ -122,6 +118,7 @@ kotlin {
         }
 
         iOSMain {
+            dependsOn commonMain
             dependencies {
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:$coroutines_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serialization_version"
@@ -153,35 +150,6 @@ task listConfigs {
     }
 }
 
-clean.doFirst {
-    delete "${rootDir}/firebase/functions/src"
-}
-
-//task copyCommonJsFirebaseModules(type: Copy) {
-//    from compileKotlinJs.destinationDir
-//    into firebaseFunctionsMain
-//}
-//
-//task copyCompileTestKotlinJsToFirebase(type: Copy) {
-//    from compileTestKotlinJs.destinationDir
-//    into firebaseFunctionsTest
-//}
-
-task firebaseDeploy(type: Exec) {
-    workingDir '../firebase'
-    commandLine 'firebase', 'deploy'
-}
-
-task firebaseTest(type: Exec) {
-    workingDir '../firebase/functions'
-    commandLine 'npm', 'test'
-}
-
-task firebaseDeployLocaly(type: Exec) {
-    workingDir '../firebase'
-    commandLine 'firebase', 'functions:shell'
-}
-
 task serializationRefToLocalModule << {
 
     def serialization = 'kotlinx-serialization-runtime-js'
@@ -191,16 +159,6 @@ task serializationRefToLocalModule << {
     }
 }
 
-//firebaseTest
-//firebaseTest.dependsOn(copyCompileTestKotlinJsToFirebase)
-//copyCompileTestKotlinJsToFirebase.dependsOn(compileTestKotlinJs)
-////
-//
-////firebaseDeploy
-//firebaseDeploy.dependsOn(serializationRefToLocalModule)
-//serializationRefToLocalModule.dependsOn(copyCommonJsFirebaseModules)
-//copyCommonJsFirebaseModules.dependsOn(compileKotlinJs)
-//
 configurations {
     compileClasspath
 }
