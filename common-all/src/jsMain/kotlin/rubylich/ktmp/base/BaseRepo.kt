@@ -26,7 +26,7 @@ actual abstract class BaseRepo<T : Any> actual constructor(
         collection.doc(id).update(field, value).await()
     }
 
-    actual override suspend fun getAll(): List<T> {
-        return collection.get().await().docs.map { parser.parse(it) }
-    }
+//    actual override suspend fun getAll(): List<T> {
+//        return collection.get().await().docs.map { parser.parse(it) }
+//    }
 }

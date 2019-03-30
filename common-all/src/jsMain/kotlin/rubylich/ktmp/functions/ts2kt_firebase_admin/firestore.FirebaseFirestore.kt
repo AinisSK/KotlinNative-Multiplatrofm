@@ -1,5 +1,6 @@
 @file:Suppress("INTERFACE_WITH_SUPERCLASS", "OVERRIDING_FINAL_MEMBER", "RETURN_TYPE_MISMATCH_ON_OVERRIDE", "CONFLICTING_OVERLOADS", "EXTERNAL_DELEGATION", "NESTED_CLASS_IN_EXTERNAL_INTERFACE")
-@file:JsModule("@google-cloud/firestore")
+@file:JsModule("common-all")
+@file:JsNonModule
 package rubylich.ktmp.functions.ts2kt_firebase_admin
 
 import kotlin.js.*
@@ -26,6 +27,7 @@ external interface Settings {
     @nativeSetter
     operator fun set(key: String, value: Any)
 }
+
 external open class Firestore(settings: Settings? = definedExternally /* null */) {
     open fun settings(settings: Settings): Unit = definedExternally
     open fun collection(collectionPath: String): CollectionReference = definedExternally
@@ -109,10 +111,10 @@ external open class Query {
     open var firestore: Firestore = definedExternally
     open fun where(fieldPath: String, opStr: dynamic /* String /* "<" */ | String /* "<=" */ | String /* "==" */ | String /* ">=" */ | String /* ">" */ | String /* "array-contains" */ */, value: Any): Query = definedExternally
     open fun where(fieldPath: FieldPath, opStr: dynamic /* String /* "<" */ | String /* "<=" */ | String /* "==" */ | String /* ">=" */ | String /* ">" */ | String /* "array-contains" */ */, value: Any): Query = definedExternally
-    open fun orderBy(fieldPath: String, directionStr: String? /* "desc" */ = definedExternally /* null */): Query = definedExternally
-    open fun orderBy(fieldPath: String, directionStr: String? /* "asc" */ = definedExternally /* null */): Query = definedExternally
-    open fun orderBy(fieldPath: FieldPath, directionStr: String? /* "desc" */ = definedExternally /* null */): Query = definedExternally
-    open fun orderBy(fieldPath: FieldPath, directionStr: String? /* "asc" */ = definedExternally /* null */): Query = definedExternally
+//    open fun orderBy(fieldPath: String, directionStr: String? /* "desc" */ = definedExternally /* null */): Query = definedExternally
+//    open fun orderBy(fieldPath: String, directionStr: String? /* "asc" */ = definedExternally /* null */): Query = definedExternally
+//    open fun orderBy(fieldPath: FieldPath, directionStr: String? /* "desc" */ = definedExternally /* null */): Query = definedExternally
+//    open fun orderBy(fieldPath: FieldPath, directionStr: String? /* "asc" */ = definedExternally /* null */): Query = definedExternally
     open fun limit(limit: Number): Query = definedExternally
     open fun offset(offset: Number): Query = definedExternally
     open fun select(vararg field: String): Query = definedExternally

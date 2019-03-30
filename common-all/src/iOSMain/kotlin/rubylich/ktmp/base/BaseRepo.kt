@@ -15,17 +15,18 @@ actual abstract class BaseRepo<T : Any> actual constructor(
 
     private val collection = FIRFirestore.firestore().collectionWithPath(ref)
 
-    actual override suspend fun getAll(): List<T> {
-        return awaitCallback { cont ->
-            collection.getDocumentsWithCompletion { document, error ->
-                if (error != null) {
-                    cont.onError(Exception(error.localizedDescription))
-                } else {
-                    cont.onComplete(document!!.documents.filterNotNull().map(parser::parse))
-                }
-            }
-        }
-    }
+
+//    actual override suspend fun getAll(): List<T> {
+//        return awaitCallback { cont ->
+//            collection.getDocumentsWithCompletion { document, error ->
+//                if (error != null) {
+//                    cont.onError(Exception(error.localizedDescription))
+//                } else {
+//                    cont.onComplete(document!!.documents.filterNotNull().map(parser::parse))
+//                }
+//            }
+//        }
+//    }
 
     actual override suspend fun get(id: String): T {
         return awaitCallback { cont ->

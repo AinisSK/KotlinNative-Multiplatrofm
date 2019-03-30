@@ -1,4 +1,6 @@
-external fun require(module:String):dynamic
+external fun require(module: String): dynamic
+
+val common = require("common-all")
 
 fun main(args: Array<String>) {
     println("Hello JavaScript!")
@@ -6,9 +8,7 @@ fun main(args: Array<String>) {
     val express = require("express")
     val app = express()
 
-    val common = require("common-all")
-    val test = common.rubylich.ktmp.Test()
-    test.test("Hi from kotlinJs")
+    common.rubylich.ktmp.testMethod("Hi from kotlinJs")
 
     app.get("/") { _, res ->
         res.type("text/plain")
