@@ -2,7 +2,6 @@ package rubylich.ktmp.features.posts
 
 import rubylich.ktmp.Post
 import rubylich.ktmp.base.IBaseParser
-import rubylich.ktmp.functions.ts2kt_firebase_admin.DocumentSnapshot
 
 actual class PostParser actual constructor() : IBaseParser<Post> {
 //    @ImplicitReflectionSerializer
@@ -14,6 +13,10 @@ actual class PostParser actual constructor() : IBaseParser<Post> {
         )
 //        return (any as DocumentSnapshot).parse()
     }
+}
+
+external open class DocumentSnapshot {
+    open fun get(fieldPath: String): Any = definedExternally
 }
 //do to firebase functions deployment bug
 //Error: Error occurred while parsing your function triggers. Please ensure that index.js only exports cloud functions.
