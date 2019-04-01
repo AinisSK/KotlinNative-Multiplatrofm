@@ -1,25 +1,13 @@
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 
-//def firebaseFunctionsPath = "../firebase/functions/src"
-//def firebaseFunctionsMain = firebaseFunctionsPath + '/main'
-//def firebaseFunctionsTest = firebaseFunctionsPath + '/test'
 def cInteropFirestorePath = "../CommonAll/src/iOSMain/c_interop/firestore/"
-
-android {
-    defaultConfig {
-        compileSdkVersion 28
-    }
-    tasks.lint.enabled = false
-}
 
 kotlin {
 
     targets {
 
-        fromPreset(presets.android, 'android')
+        fromPreset(presets.jvm, 'android')
 
         def workingDir = buildscript.sourceFile.getParent()
         fromPreset(presets.iosX64, 'iOS') {

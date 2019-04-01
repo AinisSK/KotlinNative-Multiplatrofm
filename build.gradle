@@ -6,9 +6,9 @@ allprojects {
             maven { url "http://kotlin.bintray.com/kotlin-dev" }
             maven { url "https://kotlin.bintray.com/kotlinx" }
             maven { url 'https://dl.bintray.com/jetbrains/kotlin-native-dependencies' }
-            maven {
-                url "https://plugins.gradle.org/m2/"
-            }
+//            maven {
+//                url "https://plugins.gradle.org/m2/"
+//            }
 
             google()
             jcenter()
@@ -20,7 +20,8 @@ allprojects {
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
             classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
 
-            classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
+            //classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
+            classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
         }
     }
     repositories {
@@ -32,9 +33,9 @@ allprojects {
         maven { url "https://dl.bintray.com/sargunster/maven" }
         maven { url "https://dl.bintray.com/kotlin/squash" }
         maven { url = 'https://dl.bintray.com/russhwolf/multiplatform-settings' }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+        //maven {
+        //    url "https://plugins.gradle.org/m2/"
+        //}
 
         google()
         jcenter()

@@ -17,6 +17,7 @@ actual abstract class BaseRepo<T : Any> actual constructor(
 
     private val collection = FIRFirestore.firestore().collectionWithPath(ref)
 
+
     actual override suspend fun getAll(): List<T> {
         return awaitCallback { cont ->
             collection.getDocumentsWithCompletion { document, error ->
