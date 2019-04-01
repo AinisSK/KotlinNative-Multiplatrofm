@@ -1,7 +1,10 @@
 apply plugin: 'kotlin-multiplatform'
 apply plugin: 'kotlinx-serialization'
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'java-library'
+apply plugin: 'net.ltgt.apt'
+apply plugin: 'net.ltgt.apt-idea'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'kotlin-android-extensions'
 
 def kotlinJsOutputFile = "common-all.js"
 //def firebaseFunctionsPath = "../firebase/functions/src"
@@ -9,18 +12,12 @@ def kotlinJsOutputFile = "common-all.js"
 //def firebaseFunctionsTest = firebaseFunctionsPath + '/test'
 def cInteropFirestorePath = "src/iOSMain/c_interop/firestore/"
 
-android {
-    defaultConfig {
-        compileSdkVersion 28
-    }
-    tasks.lint.enabled = false
-}
 
 kotlin {
 
     targets {
 
-        fromPreset(presets.android, 'android')
+        fromPreset(presets.jvm, 'jvm')
 
         def workingDir = buildscript.sourceFile.getParent()
         fromPreset(presets.iosX64, 'iOS') {
@@ -48,15 +45,12 @@ kotlin {
     }
 
     sourceSets {
+
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
                 api "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
                 implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
-
-                implementation "io.ktor:ktor-client-core:$ktor_version"
-                implementation "io.ktor:ktor-client-json:$ktor_version"
-                implementation "io.ktor:ktor-client-logging:$ktor_version"
             }
         }
         commonTest {
@@ -82,7 +76,7 @@ kotlin {
             }
         }
 
-        androidMain {
+        jvmMain {
             dependsOn commonMain
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -92,14 +86,19 @@ kotlin {
 
                 implementation 'com.jakewharton.timber:timber:4.7.1'
 
-                implementation 'com.google.firebase:firebase-firestore:18.2.0'
+                //implementation 'com.google.firebase:firebase-firestore:18.2.0'
 
                 implementation "io.ktor:ktor-client-core-jvm:$ktor_version"
                 implementation "io.ktor:ktor-client-json-jvm:$ktor_version"
                 implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
+
+                //implementation 'com.google.dagger:dagger:2.20'
+                //apt 'com.google.dagger:dagger-compiler:2.20'
+
+                implementation 'org.kodein.di:kodein-di-generic-jvm:6.1.0'
             }
         }
-        androidTest {
+        jvmTest {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-test'
                 implementation 'org.jetbrains.kotlin:kotlin-test-junit'
@@ -120,6 +119,19 @@ kotlin {
         }
     }
 }
+
+//apply plugin: 'idea'
+//idea {
+//    module {
+//        sourceDirs += file("$buildDir/generated/source/kapt/main")
+//        testSourceDirs += file("$buildDir/generated/source/kapt/test")
+//    }
+//}
+
+//dependencies {
+//    kapt 'com.google.dagger:dagger-compiler:2.20'
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.20'
+//}
 
 // Fix ambigous configuration for dependencies
 kotlin.targets.matching { it.platformType.name == 'native' }.all {
@@ -191,5 +203,5 @@ configurations {
     compileClasspath
 }
 
-linkTestDebugExecutableIOS.enabled = false
+//linkTestDebugExecutableIOS.enabled = false
 compileKotlinMetadata.enabled = false

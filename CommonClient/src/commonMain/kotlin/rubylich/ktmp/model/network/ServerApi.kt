@@ -12,6 +12,7 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.takeFrom
 import kotlinx.io.core.use
+import rubylich.ktmp.Api
 
 class ServerApi(private val logger: PlatformLogger) {
 
@@ -32,6 +33,10 @@ class ServerApi(private val logger: PlatformLogger) {
     }
 
     suspend fun doJob(): Boolean {
+
+        val allApi = Api()
+
+        allApi.doCalc("jnjn")
 
         logger.log("[COMMON]", "Send request to server to proceed")
 

@@ -1,6 +1,7 @@
 package rubylich.ktmp.base
 
 import kotlinx.coroutines.await
+import rubylich.ktmp.Post
 import rubylich.ktmp.functions.ts2kt_firebase_admin.Firestore
 
 actual abstract class BaseRepo<T : Any> actual constructor(
@@ -30,3 +31,5 @@ actual abstract class BaseRepo<T : Any> actual constructor(
         return collection.get().await().docs.map { parser.parse(it) }
     }
 }
+
+actual open class PostRepo: BaseRepo<Post>("post", parser)

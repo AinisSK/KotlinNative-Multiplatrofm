@@ -1,5 +1,6 @@
 package rubylich.ktmp.features.posts
 
+import rubylich.ktmp.Post
 import rubylich.ktmp.functions.ts2kt_firebase_admin.DocumentSnapshot
 import rubylich.ktmp.base.IBaseParser
 

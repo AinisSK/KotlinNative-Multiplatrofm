@@ -1,11 +1,13 @@
 package rubylich.ktmp.base
 
 import com.firebase.firestore.FIRFirestore
+import rubylich.ktmp.Post
+import rubylich.ktmp.features.posts.PostParser
 import rubylich.ktmp.util.awaitCallback
 
 actual abstract class BaseRepo<T : Any> actual constructor(
         ref: String,
-        private val parser: IBaseParser<T>
+        val parser: IBaseParser<T>
 ) : IBaseRepo<T> {
 
     init {
@@ -76,3 +78,5 @@ actual abstract class BaseRepo<T : Any> actual constructor(
         }
     }
 }
+
+actual open class PostRepo: BaseRepo<Post>("post", PostParser())
