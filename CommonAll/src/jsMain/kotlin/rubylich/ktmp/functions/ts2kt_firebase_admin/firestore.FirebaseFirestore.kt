@@ -28,6 +28,11 @@ external interface Settings {
     operator fun set(key: String, value: Any)
 }
 
+external open class FirebaseAdmin() {
+    open fun firestore(): Firestore = definedExternally
+    open fun collection(collectionPath: String): CollectionReference = definedExternally
+}
+
 external open class Firestore(settings: Settings? = definedExternally /* null */) {
     open fun settings(settings: Settings): Unit = definedExternally
     open fun collection(collectionPath: String): CollectionReference = definedExternally

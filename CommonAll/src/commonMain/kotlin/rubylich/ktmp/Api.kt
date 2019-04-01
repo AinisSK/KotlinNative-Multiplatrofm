@@ -4,11 +4,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import rubylich.ktmp.base.BaseRepo
 import rubylich.ktmp.base.PostRepo
 import kotlin.coroutines.CoroutineContext
 
-class Api: CoroutineScope {
+fun callDoCalc() {
+    Api().doCalc("FDLKBDLFKM")
+}
+
+class Api : CoroutineScope {
 
     private var job: Job = Job()
 
