@@ -24,9 +24,18 @@ class Api : CoroutineScope {
 
         val repoPost = PostRepo()
 
-        val post = Post("zhopa_id_1", "content1")
+        var post = Post("zhopa_id_1", "content1")
+        println("2")
         launch {
+            println("3")
             repoPost.set(post.id, post)
+            println("4")
+            val p = repoPost.get("zhopa_id_1")
+            println("5")
+            if (p != null && p.id == post.id) {
+                post = Post("zhopa_id_222", "content22")
+                repoPost.set(post.id, post)
+            }
         }
     }
 }
