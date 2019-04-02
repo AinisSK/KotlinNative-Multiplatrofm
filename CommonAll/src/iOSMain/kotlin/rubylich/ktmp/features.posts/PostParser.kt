@@ -2,6 +2,7 @@ package rubylich.ktmp.features.posts
 
 import com.firebase.firestore.FIRDocumentSnapshot
 import kotlinx.serialization.ImplicitReflectionSerializer
+import kotlinx.serialization.Mapper
 import kotlinx.serialization.Mapper.Companion.unmap
 import rubylich.ktmp.Post
 import rubylich.ktmp.base.IBaseParser
@@ -12,8 +13,17 @@ import rubylich.ktmp.base.IBaseParser
 
 actual class PostParser actual constructor() : IBaseParser<Post> {
 
+    override fun serialize(t: Post): Map<String, Any> {
+        return mapOf("id" to t.id, "content" to t.content)
+    }
+
     override fun parse(any: Any): Post {
-        return (any as FIRDocumentSnapshot).parse()
+        val data = any as Map<String, Any?>
+        println("data:$data")
+        return Post().apply {
+            id = data["id"] as String
+            content = data["content"] as String
+        }
     }
 }
 

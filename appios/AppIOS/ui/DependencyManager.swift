@@ -1,5 +1,4 @@
 import UIKit
-//import CommonAll
 import CommonClient
 
 class DependencyManager: NSObject {

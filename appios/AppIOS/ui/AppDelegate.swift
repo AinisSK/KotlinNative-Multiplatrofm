@@ -1,5 +1,5 @@
 import UIKit
-//import CommonAll
+import Firebase
 import CommonClient
 
 let KTUnit = KotlinUnit()
@@ -15,6 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     static var me: AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
+    }
+
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?)
+        -> Bool {
+            FirebaseApp.configure()
+            //let db = Firestore.firestore()
+            //let coll = db.collection("post")
+            return true
     }
     
     public func applicationDidBecomeActive(_ application: UIApplication) {

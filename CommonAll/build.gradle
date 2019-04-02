@@ -29,14 +29,14 @@ kotlin {
             }
         }
 
-        def workingDir = buildscript.sourceFile.getParent()
+        //def workingDir = buildscript.sourceFile.getParent()
         fromPreset(presets.iosX64, 'iOS') {
 
             binaries {
                 framework {
-                    linkerOpts '-rpath', '@executable_path/Frameworks'
-                    linkerOpts "-F${workingDir}"
-                    linkerOpts "-F${cInteropFirestorePath}"
+                    //linkerOpts '-rpath', '@executable_path/Frameworks'
+                    //linkerOpts "-F${workingDir}"
+                    //linkerOpts "-F${cInteropFirestorePath}"
                 }
             }
         }
@@ -44,6 +44,11 @@ kotlin {
         configure([iOS]) {
             compilations.main {
                 cinterops {
+                    firebase {
+                        packageName 'com.firebase'
+                        defFile = file("${cInteropFirestorePath}FirebaseCore.def")
+                        includeDirs "${cInteropFirestorePath}/FirebaseCore.framework/Headers"
+                    }
                     firestore {
                         packageName 'com.firebase.firestore'
                         defFile = file("${cInteropFirestorePath}FirebaseFirestore.def")

@@ -1,7 +1,9 @@
 package rubylich.ktmp.base
 
+import kotlinx.coroutines.*
 import rubylich.ktmp.Post
 import rubylich.ktmp.features.posts.PostParser
+import kotlin.js.Promise
 
 external fun require(module: String): dynamic
 
@@ -17,25 +19,25 @@ actual abstract class BaseRepo<T : Any> actual constructor(
 //    private val collection = Firestore().collection(ref)
 
     actual override suspend fun get(id: String): T {
-        val documentSnapshot = collection.doc(id).get().await()
-        return parser.parse(documentSnapshot)
+        val documentSnapshot = collection.doc(id).get().await
+        return documentSnapshot
     }
 
     actual override suspend fun set(id: String, t: T) {
         val map = JsMapper.map(Post.serializer(), t as Post).toJs()
-        collection.doc(id).set(map).await()
+        collection.doc(id).set(map)
     }
 
     actual override suspend fun delete(id: String) {
-        collection.doc(id).delete().await()
+        collection.doc(id).delete()
     }
 
     actual override suspend fun update(id: String, field: String, value: Any) {
-        collection.doc(id).update(field, value).await()
+        collection.doc(id).update(field, value)
     }
 
     actual override suspend fun getAll(): List<T> {
-        return collection.get().await().docs.map { result -> parser.parse(result) }
+        return collection.get().docs.map { result -> parser.parse(result) }
     }
 }
 

@@ -1,0 +1,5 @@
+language = Objective-C
+package = com.firebase
+headers = FIRApp.h
+headerFilter = **
+linkerOpts = -undefined dynamic_lookup

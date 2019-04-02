@@ -7,4 +7,4 @@ package rubylich.ktmp
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Post(val id: String = "", val content: String = "")
+data class Post(var id: String = "", var content: String = "")

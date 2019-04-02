@@ -9,14 +9,14 @@ kotlin {
 
         fromPreset(presets.jvm, 'android')
 
-        def workingDir = buildscript.sourceFile.getParent()
+        //def workingDir = buildscript.sourceFile.getParent()
         fromPreset(presets.iosX64, 'iOS') {
 
             binaries {
                 framework {
-                    linkerOpts '-rpath', '@executable_path/Frameworks'
-                    linkerOpts "-F${workingDir}"
-                    linkerOpts "-F${cInteropFirestorePath}"
+                    //linkerOpts '-rpath', '@executable_path/Frameworks'
+                    //linkerOpts "-F${workingDir}"
+                    //linkerOpts "-F${cInteropFirestorePath}"
                 }
             }
         }
@@ -117,3 +117,15 @@ configurations {
 
 linkTestDebugExecutableIOS.enabled = false
 compileKotlinMetadata.enabled = false
+
+task deleteDebugCommonAllFrameworkFromAppios(type: Delete) {
+    delete '../appios/CommonClient.framework'
+}
+
+task copyDebugCommonAllFrameworkToAppios(type: Copy) {
+    from 'build/bin/iOS/debugFramework/CommonClient.framework'
+    into '../appios/CommonClient.framework'
+}
+
+deleteDebugCommonAllFrameworkFromAppios.finalizedBy(copyDebugCommonAllFrameworkToAppios)
+linkDebugFrameworkIOS.finalizedBy(deleteDebugCommonAllFrameworkFromAppios)

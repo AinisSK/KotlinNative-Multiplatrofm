@@ -1,32 +1,30 @@
 package rubylich.ktmp
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import rubylich.ktmp.base.PostRepo
-import kotlin.coroutines.CoroutineContext
 
-fun callDoCalc() {
+suspend fun callDoCalc() {
     Api().doCalc("FDLKBDLFKM")
 }
 
-class Api : CoroutineScope {
+class Api {
 
-    private var job: Job = Job()
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
-
-
-    fun doCalc(log: String) {
+    suspend fun doCalc(log: String) {
         println(log)
 
         val repoPost = PostRepo()
 
+        println("1")
+
         val post = Post("zhopa_id_1", "content1")
-        launch {
-            repoPost.set(post.id, post)
+        println("2")
+
+        println("3")
+        repoPost.set(post.id, post)
+        println("4")
+        val p = repoPost.get("zhopa_id_1")
+        if (p != null && p.id == post.id) {
+            val post2 = Post("zhopa_id_222", "content22")
+            repoPost.set(post2.id, post2)
         }
     }
 }

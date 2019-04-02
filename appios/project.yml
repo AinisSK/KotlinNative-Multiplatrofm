@@ -7,7 +7,7 @@ targets:
     type: application
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.newco.app
+        PRODUCT_BUNDLE_IDENTIFIER: by.cedon.skabs.multiplatform
     sources:
       - AppIOS
     dependencies:

@@ -159,6 +159,7 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("MainModelImpl")))
 @interface CommonClientMainModelImpl : KotlinBase <CommonClientMainModel>
 - (instancetype)initWithLogger:(id<CommonClientCommonAllPlatformLogger>)logger __attribute__((swift_name("init(logger:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) id<CommonClientCommonAllPlatformLogger> logger;
 @end;
 
 __attribute__((swift_name("Ktor_client_coreHttpClientFeature")))

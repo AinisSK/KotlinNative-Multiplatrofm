@@ -1,5 +1,4 @@
 import Foundation
-//import CommonAll
 import CommonClient
 
 class PlatformLoggerIos: NSObject, CommonAllPlatformLogger {
