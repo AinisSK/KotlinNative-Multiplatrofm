@@ -2,11 +2,14 @@ package rubylich.ktmp.base
 
 import com.firebase.FIRApp
 import com.firebase.firestore.FIRCollectionReference
+import com.firebase.firestore.FIRDocumentSnapshot
 import com.firebase.firestore.FIRFirestore
+import platform.Foundation.NSError
 import rubylich.ktmp.Post
 import rubylich.ktmp.features.posts.PostParser
 import rubylich.ktmp.util.awaitCallback
 import rubylich.ktmp.util.toSuspendFunction
+import kotlin.native.concurrent.freeze
 
 actual abstract class BaseRepo<T : Any> actual constructor(
         ref: String,
@@ -39,13 +42,18 @@ actual abstract class BaseRepo<T : Any> actual constructor(
         println("[iOS][BaseRepo::get]: id:$id")
         return awaitCallback { cont ->
             println("[iOS][BaseRepo::get]: inside awaitCallback")
-            collection.documentWithPath(id).getDocumentWithCompletion { document, error ->
+            val completion = { document: FIRDocumentSnapshot?, error: NSError? ->
+                println("[iOS][BaseRepo::get]: inside callback")
                 if (error != null) {
+                    println("[iOS][BaseRepo::get]: inside callback error")
                     cont.onError(Exception(error.localizedDescription))
                 } else {
+                    println("[iOS][BaseRepo::get]: inside callback no error")
                     cont.onComplete(parser.parse(document!!.data()!!))
                 }
             }
+            println("[iOS][BaseRepo::get]: completion:$completion")
+            collection.documentWithPath(id).getDocumentWithCompletion(completion)
         }
     }
 
@@ -54,7 +62,7 @@ actual abstract class BaseRepo<T : Any> actual constructor(
         return awaitCallback { cont ->
             println("[iOS][BaseRepo::set]: inside awaitCallback")
             println("[iOS][BaseRepo::set]: collection:$collection")
-            collection.documentWithPath(id).setData(parser.serialize(t) as Map<Any?, *>) { error ->
+            val completion = { error: NSError? ->
                 if (error != null) {
                     println("[iOS][BaseRepo::set]: FAIL!: ${error.localizedDescription}")
                     cont.onError(Exception(error.localizedDescription))
@@ -63,6 +71,8 @@ actual abstract class BaseRepo<T : Any> actual constructor(
                     cont.onComplete(Unit)
                 }
             }
+            println("[iOS][BaseRepo::set]: completion:$completion")
+            collection.documentWithPath(id).setData(parser.serialize(t) as Map<Any?, *>, completion)
         }
     }
 

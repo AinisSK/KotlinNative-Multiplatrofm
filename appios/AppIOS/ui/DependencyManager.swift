@@ -4,7 +4,7 @@ import CommonClient
 class DependencyManager: NSObject {
     
     public lazy var mainModel : MainModel = {
-        return MainModelImpl(logger: logger as! CommonAllPlatformLogger)
+        return MainModelImpl(logger: logger )
     }()
     
     public lazy var uiContext : KotlinCoroutineContext = {

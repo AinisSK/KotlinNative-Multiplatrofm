@@ -26,12 +26,12 @@ class MainPresenter(
         val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
             view?.showError(throwable)
         }
-        GlobalScope.launch(uiContext + exceptionHandler) {
+        GlobalScope.launch(uiContext) {
             try {
                 val result = mainModel.doJob()
                 view?.onServerResponse(result)
 
-            }catch (e: Exception){
+            } catch (e: Exception){
                 view?.showError(e)
             }
         }

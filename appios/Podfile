@@ -7,7 +7,6 @@ target 'AppIOS' do
 
   # Pods for AppIOS
 
-  pod 'Firebase/Core'
-  pod 'Firebase/Firestore'
+  pod 'CommonClient', :path => '../iospod'
 
 end

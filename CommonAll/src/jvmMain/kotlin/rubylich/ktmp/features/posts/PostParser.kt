@@ -8,6 +8,10 @@ import rubylich.ktmp.base.IBaseParser
 
 actual class PostParser actual constructor() : IBaseParser<Post> {
 
+    override fun serialize(t: Post): Map<String, Any> {
+        return mapOf("id" to t.id, "content" to t.content)
+    }
+
     lateinit var postParser: PostParser
 
     override fun parse(any: Any): Post {
