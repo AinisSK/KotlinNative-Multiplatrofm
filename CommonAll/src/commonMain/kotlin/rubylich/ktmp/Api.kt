@@ -17,21 +17,32 @@ class Api {
     suspend fun doCalc(log: String) {
         println(log)
 
+        val marker = "[Api][doCalc]:"
+
         val repoPost = PostRepo()
 
-        println("1")
-        var post = Post("zhopa_id_1", "content1")
-        repoPost.set(post.id, post)
-        println("2")
-        post = Post("zhopa_id_333", "content1")
-        repoPost.set(post.id, post)
-        println("3")
-        val p = repoPost.get("zhopa_id_1")
-        if (p != null && p.id == post.id) {
-            println("4")
-            post = Post("zhopa_id_222", "content22")
-            repoPost.set(post.id, post)
+        println("$marker Create bunch 1-10")
+
+        for (i in 1..10) {
+            val id = "id-$i"
+            repoPost.set(id, Post(id, "$log-$i"))
         }
+
+        println("$marker Get All!")
+
+        val all = repoPost.getAll()
+        all.forEach {
+            println(it)
+        }
+
+        println("$marker Create bunch 10-20")
+
+        for (i in 10..20) {
+            val id = "id-$i"
+            repoPost.set(id, Post(id, "$log-$i"))
+        }
+
+        println("$marker All Done!")
     }
 }
 

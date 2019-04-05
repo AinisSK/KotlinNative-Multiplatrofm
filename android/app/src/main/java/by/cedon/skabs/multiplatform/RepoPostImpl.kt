@@ -2,12 +2,8 @@ package by.cedon.skabs.multiplatform
 
 import com.google.firebase.firestore.FirebaseFirestore
 import rubylich.ktmp.Post
-import rubylich.ktmp.base.BaseRepo
-import rubylich.ktmp.base.IBaseParser
-import rubylich.ktmp.base.IBaseRepo
 import rubylich.ktmp.base.PostRepo
 import rubylich.ktmp.lib.await
-//import javax.inject.Inject
 
 /**
  * Created by Alexander Zhigulich on 3/29/19.

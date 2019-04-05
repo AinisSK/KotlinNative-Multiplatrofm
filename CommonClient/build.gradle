@@ -119,12 +119,12 @@ linkTestDebugExecutableIOS.enabled = false
 compileKotlinMetadata.enabled = false
 
 task deleteDebugCommonAllFrameworkFromAppios(type: Delete) {
-    delete '../appios/CommonClient.framework'
+    delete '../iospod/CommonClient.framework'
 }
 
 task copyDebugCommonAllFrameworkToAppios(type: Copy) {
     from 'build/bin/iOS/debugFramework/CommonClient.framework'
-    into '../appios/CommonClient.framework'
+    into '../iospod/CommonClient.framework'
 }
 
 deleteDebugCommonAllFrameworkFromAppios.finalizedBy(copyDebugCommonAllFrameworkToAppios)

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 cd ..
 ./gradlew NodeJsApp:clean
 ./gradlew NodeJsApp:build

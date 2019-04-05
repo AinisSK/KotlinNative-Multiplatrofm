@@ -3,8 +3,6 @@ package rubylich.ktmp.util
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
-
-
 interface Callback<T> {
     fun onComplete(result: T)
     fun onError(e: Exception)

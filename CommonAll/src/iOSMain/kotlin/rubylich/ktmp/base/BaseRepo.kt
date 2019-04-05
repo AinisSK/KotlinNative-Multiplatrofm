@@ -1,77 +1,76 @@
 package rubylich.ktmp.base
 
-import com.firebase.FIRApp
-import com.firebase.firestore.FIRCollectionReference
 import com.firebase.firestore.FIRDocumentSnapshot
 import com.firebase.firestore.FIRFirestore
+import com.firebase.firestore.FIRQuerySnapshot
 import platform.Foundation.NSError
 import rubylich.ktmp.Post
 import rubylich.ktmp.features.posts.PostParser
 import rubylich.ktmp.util.awaitCallback
-import rubylich.ktmp.util.toSuspendFunction
-import kotlin.native.concurrent.freeze
 
 actual abstract class BaseRepo<T : Any> actual constructor(
         ref: String,
         val parser: IBaseParser<T>
 ) : IBaseRepo<T> {
 
-    init {
-        //FIRApp.configure()
-    }
-
-//    private val collection: FIRCollectionReference by lazy {
-//        println("[iOS][BaseRepo::collection]: ref:$ref")
-//        FIRFirestore.firestore().collectionWithPath(ref)
-//    }
     private val collection = FIRFirestore.firestore().collectionWithPath(ref)
 
     actual override suspend fun getAll(): List<T> {
+        val log = "[iOS][BaseRepo::getAll]:"
+        println(log)
         return awaitCallback { cont ->
-            collection.getDocumentsWithCompletion { document, error ->
+            println("$log inside awaitCallback")
+            var completion = { document: FIRQuerySnapshot?, error: NSError? ->
+                println("$log inside callback")
                 if (error != null) {
+                    println("$log inside callback error")
                     cont.onError(Exception(error.localizedDescription))
                 } else {
-                    cont.onComplete(document!!.documents.filterNotNull().map(parser::parse))
+                    println("$log inside callback no error")
+                    cont.onComplete(document!!.documents.mapNotNull { (it as FIRDocumentSnapshot).data() }.map(parser::parse))
                 }
             }
+            println("$log completion:$completion")
+            collection.getDocumentsWithCompletion(completion)
         }
     }
 
     actual override suspend fun get(id: String): T {
-        println("[iOS][BaseRepo::get]: id:$id")
+        val log = "[iOS][BaseRepo::get]:"
+        println("$log id:$id")
         return awaitCallback { cont ->
-            println("[iOS][BaseRepo::get]: inside awaitCallback")
+            println("$log inside awaitCallback")
             val completion = { document: FIRDocumentSnapshot?, error: NSError? ->
-                println("[iOS][BaseRepo::get]: inside callback")
+                println("$log inside callback")
                 if (error != null) {
-                    println("[iOS][BaseRepo::get]: inside callback error")
+                    println("$log inside callback error")
                     cont.onError(Exception(error.localizedDescription))
                 } else {
-                    println("[iOS][BaseRepo::get]: inside callback no error")
+                    println("$log inside callback no error")
                     cont.onComplete(parser.parse(document!!.data()!!))
                 }
             }
-            println("[iOS][BaseRepo::get]: completion:$completion")
+            println("$log completion:$completion")
             collection.documentWithPath(id).getDocumentWithCompletion(completion)
         }
     }
 
     actual override suspend fun set(id: String, t: T) {
-        println("[iOS][BaseRepo::set]: id:$id, t:$t")
+        val log = "[iOS][BaseRepo::set]:"
+        println("$log id:$id, t:$t")
         return awaitCallback { cont ->
-            println("[iOS][BaseRepo::set]: inside awaitCallback")
-            println("[iOS][BaseRepo::set]: collection:$collection")
+            println("$log inside awaitCallback")
+            println("$log collection:$collection")
             val completion = { error: NSError? ->
                 if (error != null) {
-                    println("[iOS][BaseRepo::set]: FAIL!: ${error.localizedDescription}")
+                    println("$log FAIL!: ${error.localizedDescription}")
                     cont.onError(Exception(error.localizedDescription))
                 } else {
-                    println("[iOS][BaseRepo::set]: OK!")
+                    println("$log OK!")
                     cont.onComplete(Unit)
                 }
             }
-            println("[iOS][BaseRepo::set]: completion:$completion")
+            println("$log completion:$completion")
             collection.documentWithPath(id).setData(parser.serialize(t) as Map<Any?, *>, completion)
         }
     }

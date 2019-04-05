@@ -10,5 +10,3 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: by.cedon.skabs.multiplatform
     sources:
       - AppIOS
-    dependencies:
-      - framework: CommonClient.framework

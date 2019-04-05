@@ -1,6 +1,0 @@
-framework module CommonClient {
-    umbrella header "CommonClient.h"
-
-    export *
-    module * { export * }
-}

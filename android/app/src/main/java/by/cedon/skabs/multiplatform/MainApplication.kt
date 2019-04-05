@@ -6,9 +6,7 @@ import android.support.multidex.MultiDex
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.provider
-//import rubylich.ktmp.DaggerAppComponent
 import rubylich.ktmp.Injector
-//import rubylich.ktmp.PostRepoModule
 import rubylich.ktmp.base.PostRepo
 
 class MainApplication : Application() {
@@ -22,7 +20,6 @@ class MainApplication : Application() {
             bind<PostRepo>() with provider { RepoPostImpl() }
         }
 
-        //val componentModule = DaggerAppComponent.builder().postRepoModule(PostRepoModule(RepoPostImpl())).build()
         Injector.appComponet = kodein
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
