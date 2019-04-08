@@ -1,9 +1,8 @@
 package by.cedon.skabs.multiplatform
 
+import by.cedon.skabs.multiplatform.base.PostRepo
+import by.cedon.skabs.multiplatform.posts.model.Post
 import com.google.firebase.firestore.FirebaseFirestore
-import rubylich.ktmp.Post
-import rubylich.ktmp.base.PostRepo
-import rubylich.ktmp.lib.await
 
 /**
  * Created by Alexander Zhigulich on 3/29/19.

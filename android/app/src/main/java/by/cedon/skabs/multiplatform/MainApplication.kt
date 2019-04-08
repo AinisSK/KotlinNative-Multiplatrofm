@@ -3,11 +3,10 @@ package by.cedon.skabs.multiplatform
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import by.cedon.skabs.multiplatform.base.PostRepo
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.provider
-import rubylich.ktmp.Injector
-import rubylich.ktmp.base.PostRepo
 
 class MainApplication : Application() {
 
@@ -20,7 +19,7 @@ class MainApplication : Application() {
             bind<PostRepo>() with provider { RepoPostImpl() }
         }
 
-        Injector.appComponet = kodein
+        KodeinRepository.kodein = kodein
 
         Thread.setDefaultUncaughtExceptionHandler { _, throwable ->
             println(throwable)

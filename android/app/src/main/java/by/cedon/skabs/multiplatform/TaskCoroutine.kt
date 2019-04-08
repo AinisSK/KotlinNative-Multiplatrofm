@@ -1,4 +1,4 @@
-package rubylich.ktmp.lib
+package by.cedon.skabs.multiplatform
 
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource

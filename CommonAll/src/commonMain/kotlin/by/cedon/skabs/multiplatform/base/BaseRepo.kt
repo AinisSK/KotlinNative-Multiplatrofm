@@ -1,0 +1,35 @@
+package by.cedon.skabs.multiplatform.base
+
+import by.cedon.skabs.multiplatform.posts.model.Post
+import kotlinx.serialization.ImplicitReflectionSerializer
+import kotlinx.serialization.Mapper
+
+expect abstract class BaseRepo<T : Any>(
+        ref: String,
+        parser: IBaseParser<T>
+) : IBaseRepo<T> {
+    override suspend fun getAll(): List<T>
+    override suspend fun get(id: String): T
+    override suspend fun set(id: String, t: T)
+    override suspend fun delete(id: String)
+    override suspend fun update(id: String, field: String, value: Any)
+}
+
+expect open class PostRepo() : BaseRepo<Post>
+
+interface IBaseRepo<T : Any> {
+    suspend fun getAll(): List<T>
+    suspend fun get(id: String): T
+    suspend fun set(id: String, t: T)
+    suspend fun delete(id: String)
+    suspend fun update(id: String, field: String, value: Any)
+}
+
+interface IBaseParser<T : Any> {
+    fun parse(any: Any): T
+    fun serialize(t: T): Map<String, Any>
+}
+
+@UseExperimental(ImplicitReflectionSerializer::class)
+//inline fun <reified T: Any> T.serialize(): Map<String, Any> = Mapper.map(this)
+inline fun Post.serialize(): Map<String, Any> = Mapper.map(this)
