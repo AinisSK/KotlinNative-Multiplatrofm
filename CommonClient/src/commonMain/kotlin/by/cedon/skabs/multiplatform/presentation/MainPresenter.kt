@@ -2,7 +2,6 @@ package by.cedon.skabs.multiplatform.presentation
 
 import by.cedon.skabs.multiplatform.model.MainModel
 import by.cedon.skabs.presentation.MainView
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -23,9 +22,6 @@ class MainPresenter(
     }
 
     fun doJob() {
-        val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
-            view?.showError(throwable)
-        }
         GlobalScope.launch(uiContext) {
             try {
                 val result = mainModel.doJob()
